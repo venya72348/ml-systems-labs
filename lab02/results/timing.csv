@@ -1,0 +1,5 @@
+width,batch,forward_ms,backward_ms,backward_to_forward,forward_matmul_flops,backward_matmul_flops,flop_ratio
+16,32,0.0404,0.0429,1.06,92160,118784,1.29
+16,1257,1.1325,1.1458,1.01,3620160,4665984,1.29
+64,32,0.0572,0.079,1.38,565248,868352,1.54
+64,1257,1.7367,2.7074,1.56,22203648,34109952,1.54

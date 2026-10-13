@@ -1,0 +1,37 @@
+Train (1257, 64), test (540, 64)
+
+===== Width W = 16 =====
+Shapes: W1(64, 16), b1(16,), W2(16, 16), b2(16,), W3(16, 10), b3(10,)
+Output shape: (32, 10)  (expected (32, 10))
+Max |row sum - 1|: 2.22e-16  -> PASS
+Untrained loss: 2.3026  (ln(10) = 2.3026)
+Gradient check (10 random weights, eps = 1e-5):
+  W1(49, 10): analytic=+0.000000e+00 numeric=+0.000000e+00 rel_err=0.00e+00 OK
+  W2(6, 13): analytic=+0.000000e+00 numeric=+0.000000e+00 rel_err=0.00e+00 OK
+  W1(44, 3): analytic=+3.064468e-04 numeric=+3.064468e-04 rel_err=2.17e-08 OK
+  W1(33, 15): analytic=-2.730011e-05 numeric=-2.730012e-05 rel_err=7.63e-08 OK
+  W3(12, 7): analytic=-7.676263e-05 numeric=-7.676261e-05 rel_err=1.16e-07 OK
+  W3(8, 1): analytic=-5.618299e-04 numeric=-5.618300e-04 rel_err=1.02e-08 OK
+  W3(7, 5): analytic=-5.666541e-04 numeric=-5.666541e-04 rel_err=4.50e-09 OK
+  W2(2, 14): analytic=+5.178517e-03 numeric=+5.178517e-03 rel_err=6.69e-11 OK
+  W3(10, 4): analytic=+2.201300e-02 numeric=+2.201300e-02 rel_err=5.56e-11 OK
+  W3(8, 4): analytic=+1.114245e-03 numeric=+1.114245e-03 rel_err=5.17e-09 OK
+Passed 10/10 -> PASS (need >= 9)
+
+===== Width W = 64 =====
+Shapes: W1(64, 64), b1(64,), W2(64, 64), b2(64,), W3(64, 10), b3(10,)
+Output shape: (32, 10)  (expected (32, 10))
+Max |row sum - 1|: 3.33e-16  -> PASS
+Untrained loss: 2.3026  (ln(10) = 2.3026)
+Gradient check (10 random weights, eps = 1e-5):
+  W1(49, 41): analytic=-8.889557e-04 numeric=-8.889557e-04 rel_err=3.31e-11 OK
+  W2(27, 54): analytic=+1.974377e-07 numeric=+1.974379e-07 rel_err=6.28e-07 OK
+  W1(44, 12): analytic=-5.273192e-03 numeric=-5.273192e-03 rel_err=6.30e-10 OK
+  W1(33, 62): analytic=+2.181563e-03 numeric=+2.181563e-03 rel_err=7.36e-11 OK
+  W3(48, 7): analytic=-7.181344e-03 numeric=-7.181344e-03 rel_err=1.01e-10 OK
+  W3(32, 1): analytic=-4.789038e-02 numeric=-4.789038e-02 rel_err=1.81e-11 OK
+  W3(28, 5): analytic=+1.587694e-04 numeric=+1.587694e-04 rel_err=4.42e-09 OK
+  W2(11, 59): analytic=-5.913941e-03 numeric=-5.913941e-03 rel_err=1.07e-11 OK
+  W3(41, 4): analytic=-4.357230e-03 numeric=-4.357230e-03 rel_err=1.43e-10 OK
+  W3(34, 4): analytic=+8.588613e-04 numeric=+8.588613e-04 rel_err=3.66e-10 OK
+Passed 10/10 -> PASS (need >= 9)
