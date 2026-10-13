@@ -50,4 +50,24 @@ Build a two-hidden-layer neural network in pure NumPy (no deep-learning framewor
 |---|---|---|---|---|
 | 16 | 0.001 | 2.3026 | 2.3025 | 0.1019 |
 | 16 | 0.01 | 2.3027 | 2.3025 | 0.1019 |
-| 16 | 0.1 | 1.2883 |
+| 16 | 0.1 | 1.2883 | 1.6117 | 0.5037 |
+| 64 | 0.001 | 2.3025 | 2.3025 | 0.1019 |
+| 64 | 0.01 | 2.3025 | 2.3023 | 0.1019 |
+| 64 | 0.1 | 0.1824 | 0.3096 | **0.9056** |
+
+### Timing breakdown (`results/timing.csv`)
+
+| Width | Batch | Forward (ms) | Backward (ms) | Backward / forward | Matmul FLOP ratio (bwd / fwd) |
+|---|---|---|---|---|---|
+| 16 | 32 | 0.0404 | 0.0429 | 1.06 | 1.29 |
+| 16 | 1257 | 1.1325 | 1.1458 | 1.01 | 1.29 |
+| 64 | 32 | 0.0572 | 0.0790 | 1.38 | 1.54 |
+| 64 | 1257 | 1.7367 | 2.7074 | 1.56 | 1.54 |
+
+**Which pass dominates and why.** The backward pass is slower in every case. Forward needs 3 matrix multiplications (X·W1, a1·W2, a2·W3). Backward needs 5: it computes a weight gradient for every layer (aᵀ·dz) and also passes the error back through W3 and W2 (dz·Wᵀ). For W = 64 with the full batch, the measured ratio (1.56) almost exactly matches the FLOP ratio (1.54), so the runtime is set by the matrix multiplications. For W = 16 the matrices are so small that fixed costs dominate instead: Python function calls, memory allocation, and the element-wise exp in softmax and ReLU. That is why both passes take about the same time there.
+
+## Conclusions
+
+1. My hand-written backpropagation is correct: the analytic gradients matched the numerical ones to a relative error below 1e-6 for 10 of 10 weights. The gradient check itself needs care, though. At the very small initial weights the gradients were so tiny that rounding errors made correct code look wrong.
+2. The N(0, 0.01) initialisation is too small for this network. With two hidden layers the signal almost disappears, so gradients are tiny. With lr = 0.001 and 0.01 the loss stayed at ln(10) and accuracy was 10%, which is random guessing. Only lr = 0.1 escaped this flat start, after about 20 epochs for W = 64 and 40 epochs for W = 16. A larger init such as He initialisation would probably let all learning rates train.
+3. The wider network learned faster and better: 90.6% vs 50.4% test accuracy at lr = 0.1. It costs more compute, mostly in the backward pass, which does about 1.5× the matrix-multiplication work of the forward pass. Since matmuls dominate, the cost of training grows with the width of the layers.
