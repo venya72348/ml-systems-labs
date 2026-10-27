@@ -1,0 +1,44 @@
+{
+  "MLP": {
+    "params": 235146,
+    "hand_layer": "Linear(784,256)",
+    "hand_layer_flops": 401408,
+    "thop_layer_macs": 200704,
+    "thop_layer_flops": 401408,
+    "hand_total_flops": 469504,
+    "thop_total_macs": 234752,
+    "thop_total_flops": 469504,
+    "torchinfo_mult_adds": 235146,
+    "latency_b1_ms": 0.3824500017799437,
+    "latency_b128_ms": 1.2799499672837555,
+    "test_acc": 0.8782
+  },
+  "CNN": {
+    "params": 20490,
+    "hand_layer": "Conv2d(16,32,3) on 14x14",
+    "hand_layer_flops": 1806336,
+    "thop_layer_macs": 903168,
+    "thop_layer_flops": 1806336,
+    "hand_total_flops": 2063488,
+    "thop_total_macs": 1031744,
+    "thop_total_flops": 2063488,
+    "torchinfo_mult_adds": 1050570,
+    "latency_b1_ms": 1.0637500090524554,
+    "latency_b128_ms": 22.711800003889948,
+    "test_acc": 0.8984
+  },
+  "Attention": {
+    "params": 71818,
+    "hand_layer": "1 TransformerEncoderLayer (seq=16, d=64)",
+    "hand_layer_flops": 1114112,
+    "thop_layer_macs": 0,
+    "thop_layer_flops": 0,
+    "hand_total_flops": 2329856,
+    "thop_total_macs": 50816,
+    "thop_total_flops": 101632,
+    "torchinfo_mult_adds": 3850,
+    "latency_b1_ms": 2.5667999871075153,
+    "latency_b128_ms": 15.940800018142909,
+    "test_acc": 0.8601
+  }
+}
