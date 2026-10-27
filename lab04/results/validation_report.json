@@ -1,0 +1,85 @@
+{
+  "type": [],
+  "range": [
+    {
+      "column": "age",
+      "range": [
+        17,
+        90
+      ],
+      "below": 0,
+      "above": 0,
+      "min": 17.0,
+      "max": 90.0,
+      "ok": true
+    },
+    {
+      "column": "hours-per-week",
+      "range": [
+        1,
+        99
+      ],
+      "below": 0,
+      "above": 0,
+      "min": 1.0,
+      "max": 99.0,
+      "ok": true
+    },
+    {
+      "column": "capital-gain",
+      "range": [
+        0,
+        99999
+      ],
+      "below": 0,
+      "above": 0,
+      "min": 0.0,
+      "max": 99999.0,
+      "ok": true
+    },
+    {
+      "column": "capital-loss",
+      "range": [
+        0,
+        4356
+      ],
+      "below": 0,
+      "above": 0,
+      "min": 0.0,
+      "max": 4356.0,
+      "ok": true
+    }
+  ],
+  "category": [],
+  "missing": {
+    "age": 0,
+    "workclass": 2799,
+    "fnlwgt": 0,
+    "education": 0,
+    "education-num": 0,
+    "marital-status": 0,
+    "occupation": 2809,
+    "relationship": 0,
+    "race": 0,
+    "sex": 0,
+    "capital-gain": 0,
+    "capital-loss": 0,
+    "hours-per-week": 0,
+    "native-country": 857,
+    "class": 0
+  },
+  "duplicates": {
+    "exact_duplicate_rows": 52,
+    "duplicate_feature_rows": 57
+  },
+  "columns": {
+    "missing_columns": [],
+    "unexpected_columns": []
+  },
+  "summary": {
+    "rows_checked": 48842,
+    "schema_violations": 0,
+    "rows_with_any_missing": 3620,
+    "rows_dropped": 0
+  }
+}

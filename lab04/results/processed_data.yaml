@@ -1,0 +1,258 @@
+config:
+  seed: 42
+  dataset:
+    name: adult
+    version: 2
+    target: class
+    positive_label: '>50K'
+    expected_rows: 48842
+    expected_cols: 15
+  split:
+    test_size: 0.3
+    stratify: true
+  cleaning:
+    clip_lower_pct: 1
+    clip_upper_pct: 99
+    numeric_impute: median
+    categorical_impute: most_frequent
+    drop_train_duplicates: true
+  features:
+    derived:
+    - capital_net
+    - hours_per_age
+  label_audit:
+    sample_size: 50
+  paths:
+    raw_dir: data/raw
+    processed_dir: data/processed
+    results_dir: results
+    preprocessor: results/preprocessor.joblib
+  schema:
+    missing_token: '?'
+    types:
+      age: int
+      workclass: category
+      fnlwgt: int
+      education: category
+      education-num: int
+      marital-status: category
+      occupation: category
+      relationship: category
+      race: category
+      sex: category
+      capital-gain: int
+      capital-loss: int
+      hours-per-week: int
+      native-country: category
+      class: category
+    ranges:
+      age:
+      - 17
+      - 90
+      hours-per-week:
+      - 1
+      - 99
+      capital-gain:
+      - 0
+      - 99999
+      capital-loss:
+      - 0
+      - 4356
+    categories:
+      workclass:
+      - Private
+      - Self-emp-not-inc
+      - Self-emp-inc
+      - Federal-gov
+      - Local-gov
+      - State-gov
+      - Without-pay
+      - Never-worked
+      - '?'
+      education:
+      - Preschool
+      - 1st-4th
+      - 5th-6th
+      - 7th-8th
+      - 9th
+      - 10th
+      - 11th
+      - 12th
+      - HS-grad
+      - Some-college
+      - Assoc-voc
+      - Assoc-acdm
+      - Bachelors
+      - Masters
+      - Prof-school
+      - Doctorate
+      - '?'
+      marital-status:
+      - Married-civ-spouse
+      - Divorced
+      - Never-married
+      - Separated
+      - Widowed
+      - Married-spouse-absent
+      - Married-AF-spouse
+      - '?'
+      occupation:
+      - Tech-support
+      - Craft-repair
+      - Other-service
+      - Sales
+      - Exec-managerial
+      - Prof-specialty
+      - Handlers-cleaners
+      - Machine-op-inspct
+      - Adm-clerical
+      - Farming-fishing
+      - Transport-moving
+      - Priv-house-serv
+      - Protective-serv
+      - Armed-Forces
+      - '?'
+      relationship:
+      - Wife
+      - Own-child
+      - Husband
+      - Not-in-family
+      - Other-relative
+      - Unmarried
+      - '?'
+      race:
+      - White
+      - Asian-Pac-Islander
+      - Amer-Indian-Eskimo
+      - Other
+      - Black
+      - '?'
+      sex:
+      - Female
+      - Male
+      - '?'
+      native-country:
+      - United-States
+      - Cambodia
+      - England
+      - Puerto-Rico
+      - Canada
+      - Germany
+      - Outlying-US(Guam-USVI-etc)
+      - India
+      - Japan
+      - Greece
+      - South
+      - China
+      - Cuba
+      - Iran
+      - Honduras
+      - Philippines
+      - Italy
+      - Poland
+      - Jamaica
+      - Vietnam
+      - Mexico
+      - Portugal
+      - Ireland
+      - France
+      - Dominican-Republic
+      - Laos
+      - Ecuador
+      - Taiwan
+      - Haiti
+      - Columbia
+      - Hungary
+      - Guatemala
+      - Nicaragua
+      - Scotland
+      - Thailand
+      - Yugoslavia
+      - El-Salvador
+      - Trinadad&Tobago
+      - Peru
+      - Hong
+      - Holand-Netherlands
+      - '?'
+      class:
+      - '>50K'
+      - <=50K
+    education_num:
+      Preschool: 1
+      1st-4th: 2
+      5th-6th: 3
+      7th-8th: 4
+      9th: 5
+      10th: 6
+      11th: 7
+      12th: 8
+      HS-grad: 9
+      Some-college: 10
+      Assoc-voc: 11
+      Assoc-acdm: 12
+      Bachelors: 13
+      Masters: 14
+      Prof-school: 15
+      Doctorate: 16
+ingestion:
+  rows: 48842
+  cols: 15
+  raw_sha256: d273d956c28eba72241f69dcbb78e37e93862248503a1873fb44b9fc2a6ae00b
+  openml_id: 1590
+  licence: Public
+processed:
+  train_rows: 34165
+  test_rows: 14653
+  n_features: 107
+  sha256_train: 253cc30268f71e65c87aa11abb131c2ce0bea34fca999719277f66f71782b862
+  sha256_test: ee20c623b9330724f50ec06c25618be45c1e249ea66752de6719428be3e803b7
+  sha256_combined: 20c9dd09b20b799a0bb43da863c49661bd562fb633058f12aeee4a0c71fe9315
+fitted_on_train:
+  clip_bounds:
+    age:
+    - 17.0
+    - 74.0
+    fnlwgt:
+    - 27035.2
+    - 509629.0
+    education-num:
+    - 3.0
+    - 16.0
+    capital-gain:
+    - 0.0
+    - 15024.0
+    capital-loss:
+    - 0.0
+    - 1980.0
+    hours-per-week:
+    - 8.0
+    - 80.0
+    capital_net:
+    - -1980.0
+    - 15024.0
+    hours_per_age:
+    - 0.2083
+    - 20.0
+  categorical_modes:
+    workclass: Private
+    education: HS-grad
+    marital-status: Married-civ-spouse
+    occupation: Prof-specialty
+    relationship: Husband
+    race: White
+    sex: Male
+    native-country: United-States
+metrics:
+  without_derived:
+    accuracy: 0.854
+    f1: 0.6601
+    n_features: 105
+  with_derived:
+    accuracy: 0.8578
+    f1: 0.6696
+    n_features: 107
+environment:
+  python: 3.11.8
+  pandas: 2.2.2
+  numpy: 1.26.4
+  scikit-learn: 1.5.0

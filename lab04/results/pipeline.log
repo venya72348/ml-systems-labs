@@ -1,0 +1,12 @@
+2026-10-27 19:32:18,272 | INFO | INGEST: fetch_openml(name='adult', version=2, as_frame=True)
+2026-10-27 19:32:22,735 | INFO | INGEST: rows=48842 cols=15 (expected 48842 x 15)
+2026-10-27 19:32:23,086 | INFO | INGEST: raw snapshot data/raw\adult_raw.csv sha256=d273d956c28eba72241f69dcbb78e37e93862248503a1873fb44b9fc2a6ae00b
+2026-10-27 19:32:23,567 | INFO | VALIDATE: 0 schema violation groups; missing={'workclass': 2799, 'occupation': 2809, 'native-country': 857}; exact duplicates=52. No rows dropped.
+2026-10-27 19:32:23,618 | INFO | SPLIT: train=34189 test=14653 pos_rate train=0.2393 test=0.2393
+2026-10-27 19:32:23,818 | INFO | CLEAN: dropped 24 exact duplicates from train; test untouched (14653 rows)
+2026-10-27 19:32:25,272 | INFO | BASELINE without_derived: {'accuracy': 0.854, 'f1': 0.6601, 'n_features': 105}
+2026-10-27 19:32:27,097 | INFO | BASELINE with_derived: {'accuracy': 0.8578, 'f1': 0.6696, 'n_features': 107}
+2026-10-27 19:32:27,108 | INFO | CLEAN: saved fitted transformer to results/preprocessor.joblib
+2026-10-27 19:32:36,344 | INFO | HASH: train=253cc30268f71e65c87aa11abb131c2ce0bea34fca999719277f66f71782b862 test=ee20c623b9330724f50ec06c25618be45c1e249ea66752de6719428be3e803b7 combined=20c9dd09b20b799a0bb43da863c49661bd562fb633058f12aeee4a0c71fe9315
+2026-10-27 19:32:37,038 | INFO | LABEL AUDIT: conflicting duplicate groups=5 (rows=10); 50-row dictionary check: 0 rows flagged
+2026-10-27 19:32:37,202 | INFO | DONE
