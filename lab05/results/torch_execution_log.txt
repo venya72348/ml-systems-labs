@@ -1,0 +1,74 @@
+torch 2.15.0+cu132 on Linux, threads=2
+=== A. Graph of SmallMLP (2 -> 8 -> 1) ===
+
+Autograd (backward) graph, walking grad_fn from the output:
+  SumBackward0
+    SigmoidBackward0
+      AddmmBackward0
+        AccumulateGrad
+        ReluBackward0
+          AddmmBackward0
+            AccumulateGrad
+            TBackward0
+              AccumulateGrad
+        TBackward0
+          AccumulateGrad
+
+Forward graph via torch.fx.symbolic_trace:
+  placeholder    x
+  call_module    fc1
+  call_function  relu
+  call_module    fc2
+  call_function  sigmoid
+  output         output
+
+Generated code:
+  def forward(self, x):
+      fc1 = self.fc1(x);  x = None
+      relu = torch.relu(fc1);  fc1 = None
+      fc2 = self.fc2(relu);  relu = None
+      sigmoid = torch.sigmoid(fc2);  fc2 = None
+      return sigmoid
+
+=== B. Eager vs torch.compile vs torch.jit.trace (inference, after warm-up) ===
+
+SmallMLP 2-8-1, batch 32
+  eager           0.0128 ms/call
+  jit.trace       0.0104 ms/call  (1.23x vs eager)
+  torch.compile   0.0280 ms/call  (0.46x vs eager), first call (compilation) 1.03s, output matches eager: True
+
+SmallMLP 2-8-1, batch 4096
+  eager           0.0965 ms/call
+  jit.trace       0.0874 ms/call  (1.10x vs eager)
+  torch.compile   0.0971 ms/call  (0.99x vs eager), first call (compilation) 0.11s, output matches eager: True
+
+Cheap pointwise chain (memory-bound), 4096x4096
+  eager         167.6103 ms/call
+  jit.trace     170.5151 ms/call  (0.98x vs eager)
+  torch.compile  20.0580 ms/call  (8.36x vs eager), first call (compilation) 0.06s, output matches eager: True
+
+Transcendental pointwise chain (compute-bound), 2048x2048
+  eager           9.2438 ms/call
+  jit.trace       9.3261 ms/call  (0.99x vs eager)
+  torch.compile   8.1514 ms/call  (1.13x vs eager), first call (compilation) 0.06s, output matches eager: True
+
+Linear+pointwise chain d=1024, batch 256
+  eager           2.8361 ms/call
+  jit.trace       2.4798 ms/call  (1.14x vs eager)
+  torch.compile   2.7404 ms/call  (1.03x vs eager), first call (compilation) 0.05s, output matches eager: True
+
+=== C. Tensor layout and non-contiguous views ===
+  x                      shape=[4096, 4096] dtype=torch.float32 stride=[4096, 1] contiguous=True same_storage=True
+  x.t()                  shape=[4096, 4096] dtype=torch.float32 stride=[1, 4096] contiguous=False same_storage=True
+  x[:, ::2]              shape=[4096, 2048] dtype=torch.float32 stride=[4096, 2] contiguous=False same_storage=True
+  x.t().contiguous()     shape=[4096, 4096] dtype=torch.float32 stride=[4096, 1] contiguous=True same_storage=False
+
+  op on 4096x4096 fp32       contiguous   x.t() view  slowdown  after .contiguous()
+  row sum  .sum(dim=1)           1.25ms       2.21ms     1.77x               1.27ms
+  elementwise  a*2+1            24.89ms      84.15ms     3.38x              20.27ms
+  row-wise softmax              22.08ms      70.42ms     3.19x              23.56ms
+  cumsum(dim=1)                 21.41ms      70.94ms     3.31x              20.91ms
+
+  cost of the copy itself  x.t().contiguous(): 43.86 ms
+
+Saved results/torch_execution.json

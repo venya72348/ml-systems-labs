@@ -1,0 +1,12 @@
+make_moons: 200 samples, 100 epochs full-batch GD, lr=0.5, 2->8->1, ReLU hidden, sigmoid out, BCE
+run 1: engine   7.782s   torch  0.0267s
+run 2: engine   8.630s   torch  0.0220s
+run 3: engine   9.846s   torch  0.0277s
+run 4: engine  10.755s   torch  0.0259s
+run 5: engine  11.426s   torch  0.0215s
+
+median time  engine=9.846s  torch=0.0259s  -> PyTorch is 380x faster
+loss  epoch1: engine=0.810061 torch=0.810061 | final: engine=0.245740 torch=0.245740
+max |loss diff| over all epochs = 4.44e-16
+train accuracy  engine=0.885  torch=0.885
+Saved results/moons.json, results/moons_loss.png

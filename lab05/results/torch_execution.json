@@ -1,0 +1,176 @@
+{
+  "torch_version": "2.15.0+cu132",
+  "platform": "Linux-6.18.44-fc-v230-x86_64-with-glibc2.39",
+  "threads": 2,
+  "autograd_graph": [
+    "SumBackward0",
+    "  SigmoidBackward0",
+    "    AddmmBackward0",
+    "      AccumulateGrad",
+    "      ReluBackward0",
+    "        AddmmBackward0",
+    "          AccumulateGrad",
+    "          TBackward0",
+    "            AccumulateGrad",
+    "      TBackward0",
+    "        AccumulateGrad"
+  ],
+  "fx_graph": [
+    [
+      "placeholder",
+      "x"
+    ],
+    [
+      "call_module",
+      "fc1"
+    ],
+    [
+      "call_function",
+      "relu"
+    ],
+    [
+      "call_module",
+      "fc2"
+    ],
+    [
+      "call_function",
+      "sigmoid"
+    ],
+    [
+      "output",
+      "output"
+    ]
+  ],
+  "eager_vs_compiled": [
+    {
+      "config": "SmallMLP 2-8-1, batch 32",
+      "eager_ms": 0.012803487999917706,
+      "jit_trace_ms": 0.010410842000055709,
+      "compile_ms": 0.02802103200019701,
+      "compile_first_call_s": 1.0260977420000472,
+      "compile_error": null,
+      "compile_matches_eager": true
+    },
+    {
+      "config": "SmallMLP 2-8-1, batch 4096",
+      "eager_ms": 0.09653102000015679,
+      "jit_trace_ms": 0.08742798999992374,
+      "compile_ms": 0.09714024200002314,
+      "compile_first_call_s": 0.10585520400002224,
+      "compile_error": null,
+      "compile_matches_eager": true
+    },
+    {
+      "config": "Cheap pointwise chain (memory-bound), 4096x4096",
+      "eager_ms": 167.61033459999908,
+      "jit_trace_ms": 170.51513679998607,
+      "compile_ms": 20.057999727276346,
+      "compile_first_call_s": 0.05917002500007129,
+      "compile_error": null,
+      "compile_matches_eager": true
+    },
+    {
+      "config": "Transcendental pointwise chain (compute-bound), 2048x2048",
+      "eager_ms": 9.243755666664319,
+      "jit_trace_ms": 9.32611236363941,
+      "compile_ms": 8.151396208328757,
+      "compile_first_call_s": 0.059977381999942736,
+      "compile_error": null,
+      "compile_matches_eager": true
+    },
+    {
+      "config": "Linear+pointwise chain d=1024, batch 256",
+      "eager_ms": 2.8361259583328366,
+      "jit_trace_ms": 2.4798048192766493,
+      "compile_ms": 2.7403564216875425,
+      "compile_first_call_s": 0.05308957899990219,
+      "compile_error": null,
+      "compile_matches_eager": true
+    }
+  ],
+  "layouts": {
+    "x": {
+      "shape": [
+        4096,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "stride": [
+        4096,
+        1
+      ],
+      "contiguous": true,
+      "shares_storage_with_x": true
+    },
+    "x.t()": {
+      "shape": [
+        4096,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "stride": [
+        1,
+        4096
+      ],
+      "contiguous": false,
+      "shares_storage_with_x": true
+    },
+    "x[:, ::2]": {
+      "shape": [
+        4096,
+        2048
+      ],
+      "dtype": "torch.float32",
+      "stride": [
+        4096,
+        2
+      ],
+      "contiguous": false,
+      "shares_storage_with_x": true
+    },
+    "x.t().contiguous()": {
+      "shape": [
+        4096,
+        4096
+      ],
+      "dtype": "torch.float32",
+      "stride": [
+        4096,
+        1
+      ],
+      "contiguous": true,
+      "shares_storage_with_x": false
+    }
+  },
+  "noncontiguous_ops": [
+    {
+      "op": "row sum  .sum(dim=1)",
+      "contiguous_ms": 1.2512763500012625,
+      "noncontiguous_view_ms": 2.2106384500034437,
+      "after_contiguous_copy_ms": 1.2665186499987158,
+      "slowdown": 1.766706811010384
+    },
+    {
+      "op": "elementwise  a*2+1",
+      "contiguous_ms": 24.887684149996403,
+      "noncontiguous_view_ms": 84.1536351000002,
+      "after_contiguous_copy_ms": 20.270888050004032,
+      "slowdown": 3.381336511376948
+    },
+    {
+      "op": "row-wise softmax",
+      "contiguous_ms": 22.07733639999674,
+      "noncontiguous_view_ms": 70.42172730000402,
+      "after_contiguous_copy_ms": 23.559243750003134,
+      "slowdown": 3.1897746188265006
+    },
+    {
+      "op": "cumsum(dim=1)",
+      "contiguous_ms": 21.409994450004888,
+      "noncontiguous_view_ms": 70.93623029999776,
+      "after_contiguous_copy_ms": 20.909265699998514,
+      "slowdown": 3.3132297378984874
+    }
+  ],
+  "contiguous_copy_ms": 43.85639500000025
+}

@@ -1,0 +1,48 @@
+=== Main check: ((a*b + c)**2).relu().sum() ===
+forward  engine=9.152030922133  torch=9.152030922133
+graph nodes built during forward: 49
+
+d/da
+          engine          torch      numerical
+      1.56950688     1.56950688     1.56950688
+     -0.33269297    -0.33269297    -0.33269297
+     -0.09421464    -0.09421464    -0.09421464
+     -0.88025208    -0.88025208    -0.88025208
+      5.59149512     5.59149512     5.59149512
+      0.07214057     0.07214057     0.07214057
+
+d/db
+          engine          torch      numerical
+      1.90477503     1.90477503     1.90477503
+      0.43632522     0.43632522     0.43632522
+     -0.31975839    -0.31975839    -0.31975839
+      2.54508085     2.54508085     2.54508085
+      0.15447331     0.15447331     0.15447331
+     -1.46326360    -1.46326360    -1.46326360
+
+d/dc
+          engine          torch      numerical
+      1.38258869     1.38258869     1.38258869
+      0.42287049     0.42287049     0.42287049
+      1.00643572     1.00643572     1.00643572
+     -2.63921369    -2.63921369    -2.63921369
+      3.42521354     3.42521354     3.42521354
+      3.84802589     3.84802589     3.84802589
+
+max |engine - torch|     = 0.000e+00
+max |engine - numerical| = 8.880e-10
+PASS (both < 1e-06)
+
+=== Per-op checks vs PyTorch ===
+  add        max abs diff = 0.00e+00  OK
+  mul        max abs diff = 0.00e+00  OK
+  pow3       max abs diff = 0.00e+00  OK
+  relu_pos   max abs diff = 0.00e+00  OK
+  relu_neg   max abs diff = 0.00e+00  OK
+  sub_div    max abs diff = 0.00e+00  OK
+  sigmoid    max abs diff = 0.00e+00  OK
+  exp_log    max abs diff = 0.00e+00  OK
+  reuse      max abs diff = 0.00e+00  OK
+  accumulate across two backward() calls: 4.0 -> 8.0 (expected 4 -> 8)
+
+Saved results/gradcheck.json

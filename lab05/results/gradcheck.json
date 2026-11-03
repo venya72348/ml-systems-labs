@@ -1,0 +1,21 @@
+{
+  "function": "((a*b + c)**2).relu().sum()",
+  "n_elements": 6,
+  "forward_engine": 9.152030922133362,
+  "forward_torch": 9.152030922133362,
+  "forward_abs_diff": 0.0,
+  "max_abs_diff_vs_torch": 0.0,
+  "max_abs_diff_vs_numerical": 8.879825763585814e-10,
+  "graph_nodes": 49,
+  "per_op_max_abs_diff": {
+    "add": 0.0,
+    "mul": 0.0,
+    "pow3": 0.0,
+    "relu_pos": 0.0,
+    "relu_neg": 0.0,
+    "sub_div": 0.0,
+    "sigmoid": 0.0,
+    "exp_log": 0.0,
+    "reuse": 0.0
+  }
+}
