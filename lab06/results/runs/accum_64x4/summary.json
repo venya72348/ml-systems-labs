@@ -1,0 +1,95 @@
+{
+  "name": "accum_64x4",
+  "epochs_done": 5,
+  "interrupted": false,
+  "n_params": 20490,
+  "final_val_acc": 0.885,
+  "best_val_acc": 0.885,
+  "test_acc": 0.8827,
+  "test_loss": 0.3280698400020599,
+  "mean_epoch_time_s": 4.387478779995581,
+  "mean_throughput_sps": 12542.95021427479,
+  "peak_memory_mb": 79.01025390625,
+  "memory_kind": "cuda.max_memory_allocated during training epochs (eval excluded)",
+  "peak_rss_mb": 1119.0234375,
+  "peak_rss_incl_workers_mb": 1119.0234375,
+  "peak_system_mem_increase_mb": 292.06640625,
+  "min_system_available_mb": 8594.5625,
+  "rss_before_train_mb": 852.55078125,
+  "mlflow_run_id": "796203919ce24316a13577a0140ab4f9",
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "cpu_logical": 12,
+    "cpu_physical": 6,
+    "ram_gb": 15.9,
+    "python": "3.11.8",
+    "torch": "2.3.1+cu121",
+    "torch_threads": 6,
+    "device": "cuda",
+    "gpu": "NVIDIA GeForce GTX 1050 Ti"
+  },
+  "config": {
+    "run": {
+      "name": "accum_64x4",
+      "experiment": "lab06",
+      "seed": 42,
+      "deterministic": true,
+      "rss_limit_mb": 6000
+    },
+    "data": {
+      "root": "../data",
+      "val_size": 5000,
+      "split_seed": 42,
+      "preload": true,
+      "batch_size": 64,
+      "num_workers": 0,
+      "persistent_workers": false,
+      "pin_memory": false
+    },
+    "model": {
+      "name": "cnn_lab3"
+    },
+    "optim": {
+      "name": "adam",
+      "lr": 0.001,
+      "momentum": 0.9,
+      "weight_decay": 0.0
+    },
+    "sched": {
+      "name": "cosine",
+      "step_size": 4,
+      "gamma": 0.3,
+      "t_max": null,
+      "factor": 0.3,
+      "patience": 1
+    },
+    "train": {
+      "epochs": 5,
+      "grad_accum_steps": 4,
+      "log_every": 5,
+      "sync_timers": false,
+      "max_steps_per_epoch": null,
+      "stop_after_epoch": null,
+      "resume_from": null
+    },
+    "checkpoint": {
+      "dir": "checkpoints",
+      "save_every": 1
+    },
+    "mlflow": {
+      "enabled": true,
+      "tracking_uri": "mlruns",
+      "log_checkpoint": true
+    },
+    "profile": {
+      "enabled": false,
+      "row_limit": 15,
+      "cuda_activity": false
+    },
+    "outputs": {
+      "results_dir": "results/runs",
+      "artifacts_dir": "outputs"
+    }
+  }
+}

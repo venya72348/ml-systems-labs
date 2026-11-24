@@ -1,0 +1,10 @@
+# Task 7: interrupt after epoch 3 and resume from the checkpoint. Cosine schedule over
+# 6 epochs so a wrong scheduler/optimizer restore would be visible in the curves.
+study: resume
+common:
+  train.epochs: 6
+  train.log_every: 10
+runs:
+  - {name: resume_full,  set: {}}
+  - {name: resume_split, set: {train.stop_after_epoch: 3}}                        # "crash" after epoch 3
+  - {name: resume_split, set: {train.resume_from: checkpoints/resume_split/last.pt}}  # restart

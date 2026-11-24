@@ -1,0 +1,61 @@
+{
+  "variant": "unstructured_global_0.75",
+  "method": "unstructured_global",
+  "target": 0.75,
+  "params": 997434,
+  "nonzero_params": 249642,
+  "param_sparsity": 0.7497157706675328,
+  "test_acc_before_ft": 0.9268,
+  "test_acc": 0.9292,
+  "val_acc": 0.9364,
+  "acc_drop_pp": 0.30000000000000027,
+  "ft_time_s": 33.80637159998878,
+  "ft_energy_kwh": 0.0009714679444501142,
+  "widths": "32x64x128x144",
+  "layer_sparsity": {
+    "conv1": 0.0381944440305233,
+    "conv2": 0.3073459267616272,
+    "conv3": 0.4052327573299408,
+    "fc1": 0.7882022261619568,
+    "fc2": 0.25
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.07234145431518554,
+      "train_acc": 0.9757636363636364,
+      "val_loss": 0.20594974670410157,
+      "val_acc": 0.9344,
+      "epoch_time_s": 11.10250239999732
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.05971762661066922,
+      "train_acc": 0.9797818181818182,
+      "val_loss": 0.21718143615722657,
+      "val_acc": 0.9344,
+      "epoch_time_s": 11.266903999989154
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0496310997643254,
+      "train_acc": 0.9835818181818182,
+      "val_loss": 0.23006266174316406,
+      "val_acc": 0.9364,
+      "epoch_time_s": 11.436232100008056
+    }
+  ],
+  "energy": {
+    "label": "finetune_unstructured_global_0.75",
+    "time_s": 33.80637159998878,
+    "cpu_ram_energy_kwh": 0.0002671685361170147,
+    "cpu_energy_kwh": 0.00021134128570556645,
+    "ram_energy_kwh": 5.582725041144832e-05,
+    "cpu_power_w": 22.5,
+    "energy_source": "codecarbon 2.4.2 (CPU = constant 50% TDP model, no power counters) + GPU ESTIMATE 75 W x time",
+    "gpu_energy_kwh_est": 0.0007042994083330996,
+    "energy_kwh": 0.0009714679444501142,
+    "grid_kg_co2_per_kwh": 0.633228,
+    "co2_kg": 0.0006151607035282569
+  }
+}

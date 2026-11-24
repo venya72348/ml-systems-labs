@@ -1,0 +1,8 @@
+# Task 6: gradient accumulation 64 x 4 vs real batch 256. Same seed => same sample order.
+study: grad_accum
+common:
+  train.epochs: 5
+  train.log_every: 5
+runs:
+  - {name: accum_real256, set: {data.batch_size: 256, train.grad_accum_steps: 1}}
+  - {name: accum_64x4,    set: {data.batch_size: 64,  train.grad_accum_steps: 4}}

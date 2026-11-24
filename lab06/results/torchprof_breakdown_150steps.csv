@@ -1,0 +1,6 @@
+phase,calls,time_s,share_pct
+data_loading,150,5.904,78.417
+forward,150,0.322,4.279
+backward,150,0.277,3.679
+optimizer_step,150,0.188,2.503
+"other (loop overhead, metrics, profiler)",0,0.837,11.123

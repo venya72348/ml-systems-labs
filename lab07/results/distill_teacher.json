@@ -1,0 +1,19 @@
+{
+  "teacher_train_acc": 0.9820363521575928,
+  "teacher_test_acc": 0.9322,
+  "teacher_logits_energy": {
+    "label": "teacher_logits",
+    "time_s": 3.119276200013701,
+    "cpu_ram_energy_kwh": 2.4669375187473575e-05,
+    "cpu_energy_kwh": 1.9544239342212676e-05,
+    "ram_energy_kwh": 5.1251358452609e-06,
+    "cpu_power_w": 22.5,
+    "energy_source": "codecarbon 2.4.2 (CPU = constant 50% TDP model, no power counters) + GPU ESTIMATE 75 W x time",
+    "gpu_energy_kwh_est": 6.498492083361877e-05,
+    "energy_kwh": 8.965429602109234e-05,
+    "grid_kg_co2_per_kwh": 0.633228,
+    "co2_kg": 5.677161056084426e-05
+  },
+  "T": 4.0,
+  "alpha": 0.5
+}

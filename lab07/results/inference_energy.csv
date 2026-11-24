@@ -1,0 +1,6 @@
+model,inference_time_s,inference_ms_per_image,inference_kwh,inference_mj_per_image,energy_source
+baseline (teacher),40.355092599987984,0.8071018519997597,0.00031830869603339385,22.918226114404355,"codecarbon 2.4.2 (CPU = constant 50% TDP model, no power counters)"
+global-pruned 90%,42.135066100017866,0.8427013220003573,0.00033220664699258097,23.91887858346583,"codecarbon 2.4.2 (CPU = constant 50% TDP model, no power counters)"
+structured-pruned 50% filters,17.09835259997635,0.34196705199952704,0.0001348494192837698,9.709158188431426,"codecarbon 2.4.2 (CPU = constant 50% TDP model, no power counters)"
+"student, no teacher",16.877566099981777,0.33755132199963556,0.00013317854809815488,9.588855463067151,"codecarbon 2.4.2 (CPU = constant 50% TDP model, no power counters)"
+"student, distilled",16.833489599986933,0.3366697919997387,0.0001327644256871603,9.559038649475541,"codecarbon 2.4.2 (CPU = constant 50% TDP model, no power counters)"

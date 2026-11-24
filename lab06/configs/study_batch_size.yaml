@@ -1,0 +1,10 @@
+# Task 4: batch size. Same optimizer (Adam 1e-3, cosine), 5 epochs each.
+study: batch_size
+common:
+  train.epochs: 5
+runs:
+  - {name: bs_32,  set: {data.batch_size: 32}}
+  - {name: bs_64,  set: {data.batch_size: 64}}
+  - {name: bs_128, set: {data.batch_size: 128}}
+  - {name: bs_256, set: {data.batch_size: 256}}
+  - {name: bs_512, set: {data.batch_size: 512}}

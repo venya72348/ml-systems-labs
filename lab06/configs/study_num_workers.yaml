@@ -1,0 +1,13 @@
+# Task 3: DataLoader num_workers. 2 epochs each: epoch 1 includes worker start-up,
+# epoch 2 (persistent workers) is the steady state.
+study: num_workers
+common:
+  train.epochs: 2
+  data.persistent_workers: true
+  data.preload: false      # original per-image pipeline: the data-loading cost must be real
+runs:
+  - {name: nw_0, set: {data.num_workers: 0}}
+  - {name: nw_1, set: {data.num_workers: 1}}
+  - {name: nw_2, set: {data.num_workers: 2}}
+  - {name: nw_4, set: {data.num_workers: 4}}
+  - {name: nw_8, set: {data.num_workers: 8}}

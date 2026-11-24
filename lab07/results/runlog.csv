@@ -1,0 +1,42 @@
+step,status,wall_s,peak_rss_mb,attempt
+baseline,ok,117.0,1093,
+prune unstructured_global_0.0,ok,46.2,1082,
+prune unstructured_global_0.25,ok,47.7,1102,
+prune unstructured_global_0.5,ok,52.9,1103,
+prune unstructured_global_0.75,ok,51.9,1145,
+prune unstructured_global_0.9,ok,47.1,1103,
+prune unstructured_global_0.95,ok,47.2,1123,
+prune unstructured_layer_0.25,FAILED rc=3221226505,8.1,1071,
+prune unstructured_layer_0.5,ok,49.4,1123,
+prune unstructured_layer_0.75,ok,334.8,2492,
+prune unstructured_layer_0.9,ok,48.0,1095,
+prune unstructured_layer_0.95,ok,47.9,1098,
+prune structured_0.1,ok,49.9,1202,
+prune structured_0.25,ok,44.3,1211,
+prune structured_0.5,ok,34.7,1216,
+prune aggregate,FAILED rc=1,7.7,420,
+latency + size,FAILED rc=1,117.2,1043,
+distill plain seed 42,ok,80.6,1128,
+distill kd seed 42,ok,89.2,1053,
+distill plain seed 43,FAILED rc=3221226505,14.8,1003,
+distill kd seed 43,ok,89.2,1051,
+distill plain seed 44,ok,86.8,1127,
+distill kd seed 44,ok,91.5,1050,
+distill aggregate,FAILED rc=1,6.1,417,
+summary,FAILED rc=1,15.0,907,
+prune unstructured_layer_0.25,ok,47.2,1098,1.0
+prune aggregate,ok,6.6,426,1.0
+latency + size,ok,322.2,1073,1.0
+distill plain seed 43,ok,72.0,1145,1.0
+distill aggregate,ok,34.4,1167,1.0
+summary,ok,177.5,1197,1.0
+prune aggregate,ok,7.1,425,1.0
+latency interleaved (control),FAILED rc=2,0.5,2,1.0
+distill aggregate,ok,29.2,1158,1.0
+prune aggregate,ok,6.6,425,1.0
+latency interleaved (control),ok,56.9,747,1.0
+distill aggregate,ok,28.6,1197,1.0
+summary,ok,171.0,1195,1.0
+prune aggregate,ok,6.1,425,1.0
+distill aggregate,ok,28.1,1166,1.0
+summary,ok,190.2,1211,1.0

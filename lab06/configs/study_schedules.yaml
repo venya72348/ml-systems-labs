@@ -1,0 +1,11 @@
+# Task 5: LR schedules x optimizers, equal 10-epoch budget, batch 128.
+study: schedules
+common:
+  train.epochs: 10
+runs:
+  - {name: sched_sgd_step,     set: {optim.name: sgd,  optim.lr: 0.05,  sched.name: step}}
+  - {name: sched_sgd_cosine,   set: {optim.name: sgd,  optim.lr: 0.05,  sched.name: cosine}}
+  - {name: sched_sgd_plateau,  set: {optim.name: sgd,  optim.lr: 0.05,  sched.name: plateau}}
+  - {name: sched_adam_step,    set: {optim.name: adam, optim.lr: 0.001, sched.name: step}}
+  - {name: sched_adam_cosine,  set: {optim.name: adam, optim.lr: 0.001, sched.name: cosine}}
+  - {name: sched_adam_plateau, set: {optim.name: adam, optim.lr: 0.001, sched.name: plateau}}

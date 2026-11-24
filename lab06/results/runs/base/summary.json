@@ -1,0 +1,87 @@
+{
+  "name": "base",
+  "epochs_done": 10,
+  "interrupted": false,
+  "n_params": 20490,
+  "final_val_acc": 0.906,
+  "best_val_acc": 0.906,
+  "test_acc": 0.9013,
+  "test_loss": 0.2718187265634537,
+  "mean_epoch_time_s": 35.5836679,
+  "mean_throughput_sps": 1551.9662214586342,
+  "peak_memory_mb": 466.453125,
+  "memory_kind": "peak RSS of main process during training (sampled every 50 ms)",
+  "peak_rss_incl_workers_mb": 466.453125,
+  "rss_before_train_mb": 396.0859375,
+  "mlflow_run_id": "df7099c4effe472091a318fd9840dd36",
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "cpu_logical": 12,
+    "cpu_physical": 6,
+    "ram_gb": 15.9,
+    "python": "3.11.8",
+    "torch": "2.3.1+cpu",
+    "torch_threads": 6,
+    "device": "cpu"
+  },
+  "config": {
+    "run": {
+      "name": "base",
+      "experiment": "lab06",
+      "seed": 42,
+      "deterministic": true
+    },
+    "data": {
+      "root": "../data",
+      "val_size": 5000,
+      "split_seed": 42,
+      "batch_size": 128,
+      "num_workers": 0,
+      "persistent_workers": false,
+      "pin_memory": false
+    },
+    "model": {
+      "name": "cnn_lab3"
+    },
+    "optim": {
+      "name": "adam",
+      "lr": 0.001,
+      "momentum": 0.9,
+      "weight_decay": 0.0
+    },
+    "sched": {
+      "name": "cosine",
+      "step_size": 4,
+      "gamma": 0.3,
+      "t_max": null,
+      "factor": 0.3,
+      "patience": 1
+    },
+    "train": {
+      "epochs": 10,
+      "grad_accum_steps": 1,
+      "log_every": 20,
+      "max_steps_per_epoch": null,
+      "stop_after_epoch": null,
+      "resume_from": null
+    },
+    "checkpoint": {
+      "dir": "checkpoints",
+      "save_every": 1
+    },
+    "mlflow": {
+      "enabled": true,
+      "tracking_uri": "mlruns",
+      "log_checkpoint": true
+    },
+    "profile": {
+      "enabled": false,
+      "row_limit": 15
+    },
+    "outputs": {
+      "results_dir": "results/runs",
+      "artifacts_dir": "outputs"
+    }
+  }
+}

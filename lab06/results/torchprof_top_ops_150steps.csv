@@ -1,0 +1,16 @@
+op,calls,self_cpu_s,self_share_pct
+enumerate(DataLoader)#_SingleProcessDataLoaderIter.__next__,150,3.6849,48.946
+aten::_to_copy,58050,0.2346,3.1158
+aten::copy_,96450,0.2217,2.9453
+aten::empty_strided,78312,0.203,2.696
+aten::cudnn_convolution,300,0.1801,2.3923
+aten::div,19500,0.1771,2.352
+aten::eq,19350,0.1582,2.101
+aten::select,38400,0.1544,2.0508
+aten::view,77700,0.1315,1.7465
+aten::any,19200,0.1291,1.7153
+aten::fill_,117933,0.121,1.6067
+aten::to,135606,0.1161,1.5427
+aten::sub_,19200,0.096,1.2758
+aten::empty,39008,0.0892,1.1842
+aten::permute,19200,0.0874,1.1612

@@ -1,0 +1,66 @@
+# Lab 6 base configuration. Every experiment = this file + `--set key=value` overrides.
+#   python lab06/src/train.py --config lab06/configs/base.yaml
+#   python lab06/src/train.py --config lab06/configs/base.yaml --set data.batch_size=256 --set run.name=bs256
+# Relative paths are resolved against the lab06/ folder.
+
+run:
+  name: base
+  experiment: lab06
+  seed: 42
+  deterministic: true
+  rss_limit_mb: 6000       # abort a run whose RSS (incl. workers) exceeds this
+
+data:
+  root: ../data            # shared Fashion-MNIST download (repo-level data/, git-ignored)
+  val_size: 5000           # 55k train / 5k val, same split as Lab 3
+  split_seed: 42
+  preload: true            # true: whole dataset decoded+normalised once into RAM tensors
+                           # false: per-image PIL->ToTensor->Normalize pipeline every epoch
+  batch_size: 128
+  num_workers: 0
+  persistent_workers: false
+  pin_memory: false
+
+model:
+  name: cnn_lab3           # best model from Lab 3 (Conv16-Conv32-Linear, 20,490 params)
+
+optim:
+  name: adam               # adam | sgd
+  lr: 0.001
+  momentum: 0.9            # used by sgd only
+  weight_decay: 0.0
+
+sched:
+  name: cosine             # none | step | cosine | plateau
+  step_size: 4             # step
+  gamma: 0.3               # step
+  t_max: null              # cosine; null -> train.epochs
+  factor: 0.3              # plateau
+  patience: 1              # plateau (monitors val loss)
+
+train:
+  epochs: 10
+  grad_accum_steps: 1      # micro-batches per optimizer step
+  log_every: 20            # log train loss every N optimizer steps
+  sync_timers: false       # cuda.synchronize() around phase timers (exact per-phase GPU time)
+  max_steps_per_epoch: null  # debugging only
+  stop_after_epoch: null   # simulate an interruption after this epoch
+  resume_from: null        # path to a checkpoint (.pt)
+
+checkpoint:
+  dir: checkpoints         # git-ignored
+  save_every: 1
+
+mlflow:
+  enabled: true
+  tracking_uri: mlruns     # local file store, git-ignored
+  log_checkpoint: true
+
+profile:
+  enabled: false           # torch.profiler over the first epoch (combine with train.max_steps_per_epoch)
+  row_limit: 15
+  cuda_activity: false     # also trace CUDA kernels (CUPTI); memory-hungry on this laptop
+
+outputs:
+  results_dir: results/runs   # small per-run CSV/JSON (kept in git)
+  artifacts_dir: outputs      # per-run plots + resolved config (git-ignored, also in MLflow)

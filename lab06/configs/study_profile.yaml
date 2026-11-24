@@ -1,0 +1,13 @@
+# Task 2. Original per-image DataLoader pipeline (data.preload=false) so data loading is real.
+#  phase_*    : FULL epoch, manual perf_counter phase timers (cuda.synchronize around each phase)
+#  torchprof_*: torch.profiler over the first 150 steps only (operator-level evidence; a
+#               full-epoch trace of the per-image pipeline exhausted RAM on this laptop)
+study: profile
+common:
+  train.epochs: 1
+  data.preload: false
+  train.sync_timers: true
+runs:
+  - {name: phase_nw0, set: {data.num_workers: 0}}
+  - {name: phase_nw4, set: {data.num_workers: 4, data.persistent_workers: true}}
+  - {name: torchprof_nw0, set: {data.num_workers: 0, profile.enabled: true, train.max_steps_per_epoch: 150}}

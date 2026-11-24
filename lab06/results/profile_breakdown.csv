@@ -1,0 +1,15 @@
+run,phase,time_s,share_pct
+phase_nw0,loader start (spawn workers),0.0,0.002
+phase_nw0,data_loading,11.4,68.051
+phase_nw0,forward,1.43,8.538
+phase_nw0,backward,3.203,19.117
+phase_nw0,optimizer_step,0.413,2.466
+phase_nw0,"other (loop, metrics, .item())",0.306,1.826
+phase_nw0,TOTAL epoch,16.752,100.0
+phase_nw4,loader start (spawn workers),21.322,83.122
+phase_nw4,data_loading,0.587,2.289
+phase_nw4,forward,1.04,4.056
+phase_nw4,backward,1.953,7.615
+phase_nw4,optimizer_step,0.496,1.935
+phase_nw4,"other (loop, metrics, .item())",0.252,0.982
+phase_nw4,TOTAL epoch,25.651,100.0

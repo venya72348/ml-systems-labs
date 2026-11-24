@@ -1,0 +1,48 @@
+{
+  "model": "baseline",
+  "widths": [
+    32,
+    64,
+    128,
+    144
+  ],
+  "params": 997434,
+  "test_acc": 0.9322,
+  "test_loss": 0.21655557708740233,
+  "val_acc": 0.9368,
+  "file_size_kb": 3899.943359375,
+  "size_dense_kb": 3899.1171875,
+  "size_dense_zip_kb": 3620.845703125,
+  "size_coo_kb": 20924.1025390625,
+  "size_csr_kb": 7798.025390625,
+  "size_csr_zip_kb": 3664.1943359375,
+  "latency_b1_ms": 2.7472499932628125,
+  "latency_bbig_ms": 230.66704999655485,
+  "dense_macs": 30031776,
+  "effective_macs": 30031776,
+  "thop_macs": 30031776,
+  "train_energy": {
+    "label": "train_baseline",
+    "time_s": 87.32781360001536,
+    "cpu_ram_energy_kwh": 0.0006895024422834173,
+    "cpu_energy_kwh": 0.0005458294928073882,
+    "ram_energy_kwh": 0.00014367294947602893,
+    "cpu_power_w": 22.5,
+    "energy_source": "codecarbon 2.4.2 (CPU = constant 50% TDP model, no power counters) + GPU ESTIMATE 75 W x time",
+    "gpu_energy_kwh_est": 0.00181932945000032,
+    "energy_kwh": 0.0025088318922837373,
+    "grid_kg_co2_per_kwh": 0.633228,
+    "co2_kg": 0.0015886626014870464
+  },
+  "epochs": 8,
+  "hardware": {
+    "platform": "Windows-10-10.0.19045-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 10, GenuineIntel",
+    "cpu_logical": 12,
+    "cpu_physical": 6,
+    "ram_gb": 15.9,
+    "torch": "2.3.1+cu121",
+    "torch_threads": 6,
+    "device": "cuda"
+  }
+}

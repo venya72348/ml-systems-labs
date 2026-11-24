@@ -4,6 +4,9 @@ scikit-learn==1.5.0
 scipy==1.13.1
 matplotlib==3.9.0
 seaborn==0.13.2
+# PyTorch: Labs 1-5 used the CPU wheels from PyPI. From Lab 6 on the CUDA 12.1 build is used so
+# the GTX 1050 Ti can train (the CUDA wheel also runs on machines without a GPU):
+#   pip install torch==2.3.1+cu121 torchvision==0.18.1+cu121 --index-url https://download.pytorch.org/whl/cu121
 torch==2.3.1
 torchvision==0.18.1
 torchinfo==1.8.0
@@ -23,3 +26,4 @@ requests==2.32.3
 pyarrow==15.0.2
 joblib==1.4.2
 tqdm==4.66.4
+PyYAML==6.0.3

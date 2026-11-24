@@ -1,0 +1,45 @@
+# Lab 7 configuration (compression: pruning + distillation). Paths relative to lab07/.
+seed: 42
+
+data:
+  root: ../data          # shared Fashion-MNIST (git-ignored)
+  val_size: 5000         # 55k train / 5k val / 10k test, same split as Labs 3 and 6
+  split_seed: 42
+
+teacher:                 # oversized baseline, ~1M params
+  widths: [32, 64, 128, 144]   # conv1, conv2, conv3 channels, hidden units of fc1
+  epochs: 8
+  batch_size: 128
+  lr: 0.001              # Adam + cosine over the epochs
+
+pruning:
+  sparsities: [0.0, 0.25, 0.5, 0.75, 0.9, 0.95]   # unstructured, global and per-layer
+  structured_ratios: [0.1, 0.25, 0.5]             # fraction of filters / hidden units removed
+  finetune_epochs: 3
+  finetune_lr: 0.0003    # Adam, constant, mask re-applied after every step
+  batch_size: 128
+
+student:                 # ~100k params, same family, thinner
+  widths: [16, 32, 64, 24]
+  epochs: 10
+  batch_size: 128
+  lr: 0.001
+
+distill:
+  T: 4.0
+  alpha: 0.5             # loss = alpha*CE + (1-alpha)*T^2*KL
+  seeds: [42, 43, 44]    # seed 42 is the headline comparison; 43/44 show seed noise
+
+latency:                 # always measured on the CPU (deployment target), training device may be GPU
+  threads: 6             # torch intra-op threads = physical cores of the i7-8750H
+  b1_warmup: 30
+  b1_runs: 300
+  big_batch: 256
+  big_warmup: 5
+  big_runs: 40
+
+rss_limit_mb: 6000       # run_all.py kills any stage whose RSS exceeds this
+
+energy:
+  country_iso_code: POL
+  inference_passes: 5    # passes over the 10k test set per model for the inference-energy measurement
