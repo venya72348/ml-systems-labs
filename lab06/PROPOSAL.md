@@ -8,7 +8,14 @@
 - **English:** Google Speech Commands v2 (~105k one-second 16 kHz clips, ~2.6k speakers, official train/val/test lists). 10 keywords: *yes, no, up, down, left, right, on, off, stop, go*.
 - **Ukrainian:** Multilingual Spoken Words Corpus (MSWC, MLCommons, CC-BY 4.0), Ukrainian subset: one-second word clips extracted from Mozilla Common Voice by forced alignment. 10 command words chosen by available clip count from the MSWC metadata; candidates: *так, ні, стоп, вперед, назад, ліворуч, праворуч, увімкни, вимкни, далі*. Split by speaker so that no speaker appears in more than one split.
 - **Classes:** 10 English + 10 Ukrainian keywords + "unknown" (other words from both languages) + "silence" = **22 classes**, one shared model.
-- **Dialect/accent test set (own recordings, test only):** a small set of the same commands recorded with consent by speakers from different regions (western, central, eastern, southern Ukraine, including surzhyk speakers), plus English commands spoken with a Ukrainian accent. Speaker region is the group label. No personal data beyond the region is stored.
+- **Dialect/accent test set (own recordings, test only).** Groups follow the three main Ukrainian dialect families, plus two practical variants:
+  1. *Northern (Polissian):* Zhytomyr, Chernihiv, northern Kyiv region.
+  2. *South-Western:* Galicia (Lviv, Ivano-Frankivsk), Volhynia, Podillia, Transcarpathia.
+  3. *South-Eastern:* Poltava, Cherkasy, Slobozhanshchyna (Kharkiv), the South (Zaporizhzhia, Odesa).
+  4. *Surzhyk:* mixed Ukrainian-Russian everyday speech.
+  5. *Ukrainian-accented English* (English commands only).
+
+  Protocol: each speaker says all 20 commands 3 times, recorded on a phone (16 kHz mono) in two conditions, quiet and with background noise. Recorded with consent; only the speaker's region/group is stored, no names. Target: ≥ 3 speakers per group (~15 speakers, ~900 clips). If a group cannot reach 3 speakers, it is merged with the closest group or reported separately as low-confidence. Where Common Voice metadata carries accent/region labels, those clips are used as an additional test set.
 - **Features:** 40 log-mel bins over 1 s, 10 ms hop, computed from raw audio with torchaudio.
 
 **Success metrics.**
